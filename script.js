@@ -20,6 +20,7 @@ const selectedCount = document.querySelector("#selectedCount");
 const selectedNumbers = document.querySelector("#selectedNumbers");
 const totalAmount = document.querySelector("#totalAmount");
 const reserveButton = document.querySelector("#reserveButton");
+const reservationStatus = document.querySelector("#reservationStatus");
 const clearSelection = document.querySelector("#clearSelection");
 const randomPick = document.querySelector("#randomPick");
 const confirmedCount = document.querySelector("#confirmedCount");
@@ -129,6 +130,9 @@ function renderSelection() {
   selectedNumbers.textContent = numbers.length ? numbers.join(", ") : "Ninguno";
   totalAmount.textContent = `${(numbers.length * config.spotPrice).toFixed(numbers.length ? 1 : 0)} USDC`;
   reserveButton.disabled = numbers.length === 0;
+  if (!numbers.length) {
+    reservationStatus.textContent = "";
+  }
 
   if (tg) {
     if (numbers.length) {
@@ -170,11 +174,26 @@ function sendReservation() {
   };
 
   if (tg?.sendData) {
-    tg.sendData(JSON.stringify(payload));
+    reserveButton.disabled = true;
+    reserveButton.textContent = "Enviando al bot...";
+    reservationStatus.textContent = "Vuelve al chat para ver la reserva y pagar.";
+
+    try {
+      tg.HapticFeedback?.notificationOccurred?.("success");
+      tg.sendData(JSON.stringify(payload));
+      window.setTimeout(() => tg.close?.(), 650);
+    } catch {
+      reserveButton.disabled = false;
+      reserveButton.textContent = "Reservar selección";
+      reservationStatus.textContent = "No pude enviar la reserva. Cierra y abre el Drop desde el bot.";
+      tg.HapticFeedback?.notificationOccurred?.("error");
+    }
     return;
   }
 
-  window.alert(`Reserva demo: ${numbers.join(", ")} · ${payload.amount} USDC`);
+  reservationStatus.textContent = "Abre esta Mini App desde @NumeraDropsbot para reservar.";
+  window.alert(`Abre el Drop desde @NumeraDropsbot para reservar: ${numbers.join(", ")} · ${payload.amount} USDC`);
+  window.location.href = "https://t.me/NumeraDropsbot";
 }
 
 function render() {
