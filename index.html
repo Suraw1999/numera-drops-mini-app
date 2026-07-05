@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f8fbff" />
+    <title>Númera Drops Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="label">Drop #001</p>
+          <h1>Númera Drops</h1>
+        </div>
+        <a class="support-link" href="https://t.me/+VuFHuRO4a8k0NmIx" target="_blank" rel="noreferrer">Soporte</a>
+      </header>
+
+      <section class="summary-panel" aria-label="Estado del drop">
+        <div class="metric">
+          <span>100 números</span>
+          <strong>26 premios</strong>
+        </div>
+        <div class="metric">
+          <span>Precio</span>
+          <strong>1.5 USDC</strong>
+        </div>
+        <div class="metric">
+          <span>Retorno</span>
+          <strong>80%</strong>
+        </div>
+      </section>
+
+      <section class="activation">
+        <div class="activation-copy">
+          <span>Activación</span>
+          <strong><span id="confirmedCount">0</span>/60</strong>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </section>
+
+      <section class="identity-row" aria-label="Participante">
+        <div>
+          <span>Participante</span>
+          <strong id="participantId">Confirmado en bot</strong>
+        </div>
+        <div>
+          <span>Selección</span>
+          <strong><span id="selectedCount">0</span>/5</strong>
+        </div>
+      </section>
+
+      <section class="grid-section" aria-label="Mystery grid de números">
+        <div class="section-title">
+          <div>
+            <h2>Mystery Grid</h2>
+            <p>Toca cajas para revelar y reservar tus números.</p>
+          </div>
+          <button id="randomPick" class="icon-button" type="button" aria-label="Elegir aleatorio">↻</button>
+        </div>
+        <div id="numberGrid" class="number-grid"></div>
+      </section>
+
+      <section class="selected-panel" aria-label="Números seleccionados">
+        <div>
+          <span>Tus números</span>
+          <strong id="selectedNumbers">Ninguno</strong>
+        </div>
+        <button id="clearSelection" class="ghost-button" type="button">Cambiar</button>
+      </section>
+
+      <section class="rules-strip">
+        <div>
+          <span>Fuente MVP</span>
+          <strong>ONCE España</strong>
+          <a href="https://www.juegosonce.es/resultados" target="_blank" rel="noreferrer">Ver resultados oficiales</a>
+        </div>
+        <div>
+          <span>Wallet oficial</span>
+          <strong>Arbitrum USDC</strong>
+          <code>0x351d...db35</code>
+        </div>
+      </section>
+
+      <footer class="action-bar">
+        <div>
+          <span>Total</span>
+          <strong id="totalAmount">0 USDC</strong>
+        </div>
+        <button id="reserveButton" class="primary-button" type="button" disabled>Reservar selección</button>
+      </footer>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
