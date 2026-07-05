@@ -3,6 +3,8 @@ const tg = window.Telegram?.WebApp;
 const config = {
   maxSelection: 5,
   spotPrice: 1.5,
+  activationTarget: 60,
+  reservationTtlMinutes: 15,
   supportUrl: "https://t.me/+VuFHuRO4a8k0NmIx",
   paidNumbers: ["04", "18", "27", "63", "88", "91"],
   reservedNumbers: ["12", "39", "57"],
@@ -148,7 +150,7 @@ function renderSelection() {
 function renderProgress() {
   const confirmed = config.paidNumbers.length + 34;
   confirmedCount.textContent = String(confirmed);
-  progressBar.style.width = `${Math.min(100, (confirmed / 60) * 100)}%`;
+  progressBar.style.width = `${Math.min(100, (confirmed / config.activationTarget) * 100)}%`;
 }
 
 function pulseReserveButton() {
@@ -176,7 +178,7 @@ function sendReservation() {
   if (tg?.sendData) {
     reserveButton.disabled = true;
     reserveButton.textContent = "Enviando al bot...";
-    reservationStatus.textContent = "Vuelve al chat para ver la reserva y pagar.";
+    reservationStatus.textContent = `Vuelve al bot: tienes ${config.reservationTtlMinutes} minutos para pagar.`;
 
     try {
       tg.HapticFeedback?.notificationOccurred?.("success");

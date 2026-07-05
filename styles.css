@@ -154,6 +154,7 @@ h2 {
 }
 
 .summary-panel,
+.steps-panel,
 .identity-row,
 .selected-panel,
 .rules-strip {
@@ -166,7 +167,12 @@ h2 {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.steps-panel {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .metric,
+.steps-panel > div,
 .identity-row > div,
 .selected-panel,
 .rules-strip > div,
@@ -182,6 +188,32 @@ h2 {
 .metric {
   min-height: 68px;
   padding: 11px;
+}
+
+.steps-panel > div {
+  min-height: 94px;
+  padding: 10px;
+}
+
+.steps-panel span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.steps-panel strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 13px;
+  line-height: 1.1;
+}
+
+.steps-panel p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.25;
 }
 
 .metric strong,
@@ -476,8 +508,9 @@ h2 {
   }
 
   .summary-panel,
+  .steps-panel,
   .rules-strip {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   h1 {

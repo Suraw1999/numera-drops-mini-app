@@ -9,12 +9,14 @@ Visual Mini App MVP for Númera Drop #001.
 - Selection limit of 5 numbers.
 - Sends the selected numbers back to the Telegram bot with `Telegram.WebApp.sendData`.
 - The bot creates the real reservation and returns payment instructions.
+- The Mini App should be opened from the Telegram reply keyboard Web App button, so `sendData` returns the reservation to the bot.
 - The visual grid can be static/demo data in v0; the bot is the source of truth for final availability.
 - Hidden numbers are randomized per Mini App session, so adjacent boxes do not reveal predictable consecutive numbers.
 - Participant ID display.
-- Activation progress and drop stats.
+- Opening target progress and drop stats.
 - ONCE España result source link.
-- Arbitrum USDC official wallet summary.
+- Participation steps: register, choose, pay within 15 minutes, share referral link.
+- Winner social proof reminder.
 - Community/support link.
 
 ## Run locally
