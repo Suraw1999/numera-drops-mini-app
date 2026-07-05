@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#f8fbff" />
+    <meta name="theme-color" content="#07111f" />
     <title>Númera Drops Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="./styles.css" />
@@ -15,8 +15,16 @@
           <p class="label">Drop #001</p>
           <h1>Númera Drops</h1>
         </div>
-        <a class="support-link" href="https://t.me/+VuFHuRO4a8k0NmIx" target="_blank" rel="noreferrer">Soporte</a>
+        <a class="support-link" href="https://t.me/+VuFHuRO4a8k0NmIx" target="_blank" rel="noreferrer" aria-label="Abrir soporte">Soporte</a>
       </header>
+
+      <section class="hero-panel" aria-label="Resumen del drop">
+        <div>
+          <span>Premio principal</span>
+          <strong>50 USDC</strong>
+        </div>
+        <p>El punto de calor sale de los 2 últimos números del resultado oficial de ONCE España.</p>
+      </section>
 
       <section class="summary-panel" aria-label="Estado del drop">
         <div class="metric">
@@ -58,11 +66,12 @@
         <div class="section-title">
           <div>
             <h2>Mystery Grid</h2>
-            <p>Toca cajas para revelar y reservar tus números.</p>
+            <p>Los números están ocultos y mezclados. Cada caja revela una posición aleatoria.</p>
           </div>
-          <button id="randomPick" class="icon-button" type="button" aria-label="Elegir aleatorio">↻</button>
+          <button id="randomPick" class="icon-button" type="button" aria-label="Elegir aleatorio" title="Elegir aleatorio">↻</button>
         </div>
         <div id="numberGrid" class="number-grid"></div>
+        <p class="grid-note">Las cajas bloqueadas ya están reservadas o pagadas.</p>
       </section>
 
       <section class="selected-panel" aria-label="Números seleccionados">

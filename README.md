@@ -5,11 +5,12 @@ Visual Mini App MVP for Númera Drop #001.
 ## What it does
 
 - Mobile-first Telegram Mini App screen.
-- 00-99 mystery grid with reveal interaction.
+- 00-99 mystery grid with reveal interaction and shuffled board positions.
 - Selection limit of 5 numbers.
 - Sends the selected numbers back to the Telegram bot with `Telegram.WebApp.sendData`.
 - The bot creates the real reservation and returns payment instructions.
 - The visual grid can be static/demo data in v0; the bot is the source of truth for final availability.
+- Hidden numbers are randomized per Mini App session, so adjacent boxes do not reveal predictable consecutive numbers.
 - Participant ID display.
 - Activation progress and drop stats.
 - ONCE España result source link.

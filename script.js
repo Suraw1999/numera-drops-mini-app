@@ -6,12 +6,13 @@ const config = {
   supportUrl: "https://t.me/+VuFHuRO4a8k0NmIx",
   paidNumbers: ["04", "18", "27", "63", "88", "91"],
   reservedNumbers: ["12", "39", "57"],
-  emojis: ["◆", "✦", "●", "◇", "✧", "■"]
+  symbols: ["◆", "✦", "●", "◇", "✧", "■", "✺", "✹"]
 };
 
 const state = {
   selected: new Set(),
-  revealed: new Set(["07", "22", "41", "72"])
+  revealed: new Set(),
+  board: []
 };
 
 const grid = document.querySelector("#numberGrid");
@@ -42,17 +43,24 @@ function formatNumber(index) {
   return String(index).padStart(2, "0");
 }
 
+function buildBoard() {
+  const numbers = Array.from({ length: 100 }, (_, index) => formatNumber(index));
+  state.board = shuffle(numbers);
+}
+
 function renderGrid() {
   grid.innerHTML = "";
-  for (let index = 0; index < 100; index += 1) {
-    const id = formatNumber(index);
+  state.board.forEach((id, index) => {
     const tile = document.createElement("button");
     tile.type = "button";
     tile.className = "tile";
     tile.dataset.id = id;
-    tile.dataset.emoji = config.emojis[index % config.emojis.length];
-    tile.textContent = id;
-    tile.setAttribute("aria-label", `Número ${id}`);
+    tile.dataset.symbol = config.symbols[index % config.symbols.length];
+    tile.textContent = state.revealed.has(id) || state.selected.has(id) ? id : "";
+    tile.setAttribute(
+      "aria-label",
+      state.revealed.has(id) || state.selected.has(id) ? `Número ${id}` : "Caja sin revelar"
+    );
 
     if (config.paidNumbers.includes(id)) {
       tile.classList.add("paid");
@@ -60,17 +68,18 @@ function renderGrid() {
     } else if (config.reservedNumbers.includes(id)) {
       tile.classList.add("reserved");
       tile.disabled = true;
-    } else if (!state.revealed.has(id) && !state.selected.has(id)) {
-      tile.classList.add("covered");
     }
 
+    if (!state.revealed.has(id) && !state.selected.has(id)) {
+      tile.classList.add("covered");
+    }
     if (state.selected.has(id)) {
       tile.classList.add("selected");
     }
 
     tile.addEventListener("click", () => toggleTile(id));
     grid.appendChild(tile);
-  }
+  });
 }
 
 function toggleTile(id) {
@@ -91,7 +100,7 @@ function toggleTile(id) {
 }
 
 function randomSelection() {
-  const available = Array.from({ length: 100 }, (_, index) => formatNumber(index)).filter(
+  const available = state.board.filter(
     (id) => !config.paidNumbers.includes(id) && !config.reservedNumbers.includes(id)
   );
 
@@ -183,4 +192,5 @@ randomPick.addEventListener("click", randomSelection);
 reserveButton.addEventListener("click", sendReservation);
 
 initTelegram();
+buildBoard();
 render();
